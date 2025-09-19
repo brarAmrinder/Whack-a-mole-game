@@ -17,20 +17,50 @@ import java.util.ArrayList;
 
 
 public class GameActivity extends AppCompatActivity {
-
-    /**reference to game logic which controls play */
+    private TextView tvTimer, tvScore;
     private GameLogic gameLogic;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_game);
 
-        /** link TextViews from layout */
-        TextView timerTextView  = findViewById(R.id.tv_timer_text);
-        TextView scoreTextView = findViewById(R.id.tv_score_text);
+
+        tvTimer = findViewById(R.id.tv_timer_text);
+        tvScore = findViewById(R.id.tv_score_text);
 
 
+        ArrayList<ImageView> moleViews = new ArrayList<>();
+        moleViews.add(findViewById(R.id.iv_without_mole_01));
+        moleViews.add(findViewById(R.id.iv_without_mole_02));
+        moleViews.add(findViewById(R.id.iv_without_mole_03));
+        moleViews.add(findViewById(R.id.iv_without_mole_04));
+        moleViews.add(findViewById(R.id.iv_without_mole_05));
+        moleViews.add(findViewById(R.id.iv_without_mole_06));
+        moleViews.add(findViewById(R.id.iv_without_mole_07));
+        moleViews.add(findViewById(R.id.iv_without_mole_08));
+        moleViews.add(findViewById(R.id.iv_without_mole_09));
+
+
+        gameLogic = new GameLogic(this, moleViews, tvScore, tvTimer);
+
+        gameLogic.setGameOverListener(finalScore -> {
+            Intent intent = new Intent(GameActivity.this, PlayerActivity.class);
+            intent.putExtra("score", finalScore);
+            startActivity(intent);
+            finish();
+        });
+
+        // Set click listeners for all ImageViews
+        for (int i = 0; i < moleViews.size(); i++) {
+            final int index = i;
+            moleViews.get(i).setOnClickListener(v -> gameLogic.hitMole(index));
+        }
+
+
+        gameLogic.startGame();
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -38,9 +68,9 @@ public class GameActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
     }
 
 
+    }
 
-
-}

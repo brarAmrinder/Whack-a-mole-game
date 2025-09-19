@@ -1,7 +1,7 @@
 package com.example.assignment2;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -10,16 +10,64 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class LeaderboardActivity extends AppCompatActivity {
+
+
+    private ImageView[] avatarViews;
+    private TextView[] nameViews;
+    private TextView[] scoreViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_leaderboard);
-        Intent intent = getIntent();
-        String playerName = intent.getStringExtra("playerName");
-        int score = intent.getIntExtra("score", 0);
+
+
+        avatarViews = new ImageView[] {
+                findViewById(R.id.iv_leaderboard_avatar1),
+                findViewById(R.id.iv_leaderboard_avatar2),
+                findViewById(R.id.iv_leaderboard_avatar3),
+                findViewById(R.id.iv_leaderboard_avatar4),
+                findViewById(R.id.iv_leaderboard_avatar5)
+        };
+
+        nameViews = new TextView[] {
+                findViewById(R.id.tv_leaderboard_name1),
+                findViewById(R.id.tv_leaderboard_name2),
+                findViewById(R.id.tv_leaderboard_name3),
+                findViewById(R.id.tv_leaderboard_name4),
+                findViewById(R.id.tv_leaderboard_name5)
+        };
+
+        scoreViews = new TextView[] {
+                findViewById(R.id.tv_leaderboard_score1),
+                findViewById(R.id.tv_leaderboard_score2),
+                findViewById(R.id.tv_leaderboard_score3),
+                findViewById(R.id.tv_leaderboard_score4),
+                findViewById(R.id.tv_leaderboard_score5)
+        };
+
+
+        Leaderboard leaderboard = Leaderboard.getInstance();
+        ArrayList<Player> players = leaderboard.getLeaderboard();
+
+
+        for (int i = 0; i < 5; i++) {
+            if (i < players.size()) {
+                Player player = players.get(i);
+                avatarViews[i].setImageResource(player.getPlayerAvatar());
+                nameViews[i].setText(player.getPlayerName());
+                scoreViews[i].setText(String.valueOf(player.getPlayerScore()));
+            } else {
+                // Empty slot
+                avatarViews[i].setImageDrawable(null);
+                nameViews[i].setText("");
+                scoreViews[i].setText("");
+            }
+        }
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -28,6 +76,4 @@ public class LeaderboardActivity extends AppCompatActivity {
             return insets;
         });
     }
-
-
 }

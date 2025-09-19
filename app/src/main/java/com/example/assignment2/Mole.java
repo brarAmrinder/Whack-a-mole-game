@@ -20,8 +20,6 @@ public class Mole {
         this.imageView = imageView;
         // initially hidden
         this.isVisible = false;
-        // hide UI initially
-        this.imageView.setVisibility(ImageView.INVISIBLE);
     }
 
     /**
@@ -55,9 +53,9 @@ public class Mole {
     public void setVisible(boolean visible) {
         isVisible = visible;
         if (visible) {
-            imageView.setVisibility(ImageView.VISIBLE);
+            imageView.setImageResource(R.drawable.img_with_mole);
         } else {
-            imageView.setVisibility(ImageView.INVISIBLE);
+            imageView.setImageResource(R.drawable.img_without_mole);
         }
     }
 }

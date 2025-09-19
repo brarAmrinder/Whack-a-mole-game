@@ -10,11 +10,11 @@ public class Player {
 
     /**Declaring variables */
     private String playerName;
-    private Drawable playerAvatar;
+    private int playerAvatar;
     private int playerScore;
 
     /**Constructor */
-    public Player(String name, Drawable avatar, int score){
+    public Player(String name, int avatar, int score){
 
         this.playerName=name;
         this.playerAvatar=avatar;
@@ -27,7 +27,7 @@ public class Player {
         return playerName;
     }
 
-    public Drawable getPlayerAvatar(){
+    public int getPlayerAvatar(){
         return playerAvatar;
     }
 

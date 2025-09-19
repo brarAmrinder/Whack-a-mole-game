@@ -16,7 +16,7 @@ import java.util.Random;
 public class GameLogic {
 
     /** declare variables */
-    private static final long MOLE_DISPLAY_TIME = 800;
+    private static final long MOLE_DISPLAY_TIME = 1000;
     private static final long GAME_DURATION = 30000;
     private int currentScore;
     private long timeRemaining;
@@ -30,6 +30,9 @@ public class GameLogic {
     private TextView timerTextView;
     private boolean isGameRunning;
     private Context context;
+
+    private GameOverListener gameOverListener;
+
 
     /**
      * Constructor: prepares the game logic.
@@ -55,11 +58,19 @@ public class GameLogic {
         this.random = new Random();
         this.moleHandler = new Handler();
 
-        // Convert each ImageView into a com.example.assignment2.Mole object
+        /**Convert each ImageView into a com.example.assignment2.Mole object */
         this.moles = new ArrayList<>();
         for (int i = 0; i < moleViews.size(); i++) {
             this.moles.add(new Mole(i, moleViews.get(i)));
         }
+    }
+
+    public interface GameOverListener {
+        void onGameOver(int finalScore);
+    }
+
+    public void setGameOverListener(GameOverListener listener) {
+        this.gameOverListener = listener;
     }
 
     /**
@@ -77,12 +88,14 @@ public class GameLogic {
         startMoleLoop();
     }
 
+
+
     /**
      * Initializes and starts the countdown timer.
      * Updates timer text every second.
      */
     public void startTimer() {
-        gameTimer = new CountDownTimer(GAME_DURATION, 1000) {
+        gameTimer = new CountDownTimer(GAME_DURATION, 800) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeRemaining = millisUntilFinished;
@@ -96,6 +109,10 @@ public class GameLogic {
                 timerTextView.setText("Time: 0");
                 stopMoleLoop();
                 isGameRunning = false;
+
+                if (gameOverListener != null) {
+                    gameOverListener.onGameOver(currentScore);
+                }
             }
         }.start();
     }
@@ -107,14 +124,19 @@ public class GameLogic {
         moleRunnable = new Runnable() {
             @Override
             public void run() {
-                if (!isGameRunning) return;
-                showMole(random.nextInt(moles.size()));
+                int index = random.nextInt(moles.size());
+
+                // Show random mole and hide previous
+                showMole(index);
+
+                // Repeat after MOLE_DISPLAY_TIME
                 moleHandler.postDelayed(this, MOLE_DISPLAY_TIME);
             }
         };
-        /** starts the loop*/
         moleHandler.post(moleRunnable);
     }
+
+
 
     /**
      * Stops the mole-spawning loop.
