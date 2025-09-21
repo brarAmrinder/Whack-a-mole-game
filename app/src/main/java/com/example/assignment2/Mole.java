@@ -3,7 +3,7 @@ package com.example.assignment2;
 import android.widget.ImageView;
 
 /**
- * The com.example.assignment2.Mole class represents a mole in the game.
+ * Mole class represents a mole in the game.
  * Each mole has a position (index), an associated ImageView for UI,
  * and a visibility state (isVisible).
  */

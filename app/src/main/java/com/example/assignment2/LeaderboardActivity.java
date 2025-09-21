@@ -12,6 +12,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
+/**
+ * LeaderboardActivity displays the top players,
+ * showing their avatar, name, and score.
+ */
 public class LeaderboardActivity extends AppCompatActivity {
 
 
@@ -25,7 +29,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_leaderboard);
 
-
+        /**
+        Bind the five leaderboard row views to arrays so they
+          can be updated in a simple loop. */
         avatarViews = new ImageView[] {
                 findViewById(R.id.iv_leaderboard_avatar1),
                 findViewById(R.id.iv_leaderboard_avatar2),
@@ -50,7 +56,8 @@ public class LeaderboardActivity extends AppCompatActivity {
                 findViewById(R.id.tv_leaderboard_score5)
         };
 
-
+        /**
+       Retrieve leaderboard data and display it in the rows.*/
         Leaderboard leaderboard = Leaderboard.getInstance();
         ArrayList<Player> players = leaderboard.getLeaderboard();
 

@@ -20,7 +20,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 /**
  * PlayerActivity
- * ----------------------------------------------------
  * This activity allows the player to:
  *  - Enter their name
  *  - Select an avatar from a RadioGroup

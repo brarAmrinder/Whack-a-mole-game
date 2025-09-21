@@ -1,6 +1,6 @@
 package com.example.assignment2;
 
-import android.graphics.drawable.Drawable;
+
 
 /**
  * com.example.assignment2.Player class represents a player in the game.

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    This layout displays the leaderboard screen for the game.
+
+    Main Sections:
+    1. Top banner image showing the game logo
+    2. Leaderboard title
+    3. Leaderboard entries (top 5 players), each showing:
+       - Player avatar
+       - Player name
+       - Player score
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

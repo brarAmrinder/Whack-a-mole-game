@@ -15,7 +15,14 @@ import android.os.CountDownTimer;
 
 import java.util.ArrayList;
 
-
+/**
+ * GameActivity handles the main gameplay screen.
+ * Responsibilities include:
+ * - Displaying the timer and score
+ * - Managing mole ImageViews and their click events
+ * - Starting the game logic through GameLogic class
+ * - Navigating to PlayerActivity when the game ends
+ */
 public class GameActivity extends AppCompatActivity {
     private TextView tvTimer, tvScore;
     private GameLogic gameLogic;
@@ -27,11 +34,11 @@ public class GameActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_game);
 
-
+        // Initialize timer and score TextViews
         tvTimer = findViewById(R.id.tv_timer_text);
         tvScore = findViewById(R.id.tv_score_text);
 
-
+        // Initialize the 3x3 grid of mole ImageViews
         ArrayList<ImageView> moleViews = new ArrayList<>();
         moleViews.add(findViewById(R.id.iv_without_mole_01));
         moleViews.add(findViewById(R.id.iv_without_mole_02));
@@ -43,9 +50,10 @@ public class GameActivity extends AppCompatActivity {
         moleViews.add(findViewById(R.id.iv_without_mole_08));
         moleViews.add(findViewById(R.id.iv_without_mole_09));
 
-
+        // Initialize game logic with the mole views, score, and timer
         gameLogic = new GameLogic(this, moleViews, tvScore, tvTimer);
 
+        // Set a listener for game over event to navigate to PlayerActivity
         gameLogic.setGameOverListener(finalScore -> {
             Intent intent = new Intent(GameActivity.this, PlayerActivity.class);
             intent.putExtra("score", finalScore);
@@ -59,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
             moleViews.get(i).setOnClickListener(v -> gameLogic.hitMole(index));
         }
 
-
+        //start the game
         gameLogic.startGame();
 
 

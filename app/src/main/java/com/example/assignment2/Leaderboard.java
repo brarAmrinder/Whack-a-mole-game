@@ -1,5 +1,4 @@
 package com.example.assignment2;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,10 +12,9 @@ public class Leaderboard {
     private static Leaderboard leaderboardInstance;
 
     private final ArrayList<Player> leaderboard;
- /** Maximum number of players to keep */
+
+    /** Maximum number of players to keep */
     private static final int MAX_LEADERBOARD_SIZE = 5;
-
-
 
     /**Constructor */
     private Leaderboard() {
@@ -79,5 +77,6 @@ public class Leaderboard {
     public ArrayList<Player> getLeaderboard() {
         return new ArrayList<>(leaderboard);
     }
+
 }
 

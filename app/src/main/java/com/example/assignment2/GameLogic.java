@@ -65,10 +65,21 @@ public class GameLogic {
         }
     }
 
+    /**
+     * Interface for listening to game over events.
+     * Classes implementing this interface can define behavior
+     * when the game ends and the final score is available.
+     */
     public interface GameOverListener {
         void onGameOver(int finalScore);
     }
 
+    /**
+     * Registers a listener to be notified when the game is over.
+     *
+     * @param listener An implementation of GameOverListener that defines
+     *                 the action to perform when the game ends
+     */
     public void setGameOverListener(GameOverListener listener) {
         this.gameOverListener = listener;
     }
