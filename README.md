@@ -119,6 +119,22 @@ git clone https://github.com/brarAmrinder/Whack-a-mole-game.git
 
 ---
 
+##Screenshots
+
+1. Main screen of app
+   <img width="1187" height="2513" alt="MainPage" src="https://github.com/user-attachments/assets/451a2937-7856-4aa0-a0cc-1719e5a75df6" />
+
+2. game logic - touch a mole and it counts score
+   <img width="1187" height="2513" alt="GamePlay" src="https://github.com/user-attachments/assets/e7f5e2e8-8b51-4227-ac7d-24633a06d247" />
+
+3. Leaderboard screenshots which updates scores based on player performance
+
+   <img width="1187" height="2513" alt="Leaderboard" src="https://github.com/user-attachments/assets/a11e218e-e059-4c2c-b535-04a46e2b0b9f" />
+
+<img width="1187" height="2513" alt="Leaderboard2" src="https://github.com/user-attachments/assets/f7b6fa70-1476-4fc1-9595-b76ec78d5134" />
+
+
+
 ## 👨‍💻 Author
 
 **Amrinder Brar**
